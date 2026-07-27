@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajian Ummahat POSKU Makassar</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:#f8fafc;
+        }
+
+        .hero{
+            background:linear-gradient(rgba(0,90,70,.85),rgba(0,90,70,.85)),
+            url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1600&q=80');
+            background-size:cover;
+            background-position:center;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-5">
+
+        <div class="flex justify-between items-center h-16">
+
+            <h1 class="font-bold text-xl text-emerald-700">
+                Ummahat POSKU
+            </h1>
+
+            <div class="space-x-8 font-medium">
+                <a href="index.html" class="text-emerald-700">Beranda</a>
+                <a href="kajian.html" class="hover:text-emerald-700">Kajian</a>
+                <a href="tentang.html" class="hover:text-emerald-700">Tentang</a>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero text-white">
+
+    <div class="max-w-6xl mx-auto px-6 py-28">
+
+        <h2 class="text-5xl font-bold mb-6">
+            Kajian Ummahat <br>
+            POSKU Makassar
+        </h2>
+
+        <p class="text-xl max-w-2xl leading-relaxed">
+            Kajian Islam bulanan untuk muslimah sebagai sarana menuntut ilmu,
+            mempererat ukhuwah, dan meningkatkan keimanan.
+        </p>
+
+        <div class="mt-10">
+
+            <a href="#kajian"
+                class="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-full font-semibold">
+
+                Lihat Jadwal Kajian
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= KAJIAN TERDEKAT ================= -->
+
+<section id="kajian" class="py-20">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <div class="text-center">
+
+            <h2 class="text-4xl font-bold text-emerald-700">
+                Kajian Bulan Ini
+            </h2>
+
+            <p class="text-gray-600 mt-3">
+                InsyaAllah dilaksanakan setiap bulan.
+            </p>
+
+        </div>
+
+        <div class="mt-12 bg-white rounded-3xl shadow-xl p-10">
+
+            <span class="bg-emerald-600 text-white px-4 py-2 rounded-full">
+                Kajian Bulanan
+            </span>
+
+            <h3 id="tema"
+                class="text-3xl font-bold mt-6">
+                Mendidik Anak dengan Al-Qur'an
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+
+                <div>
+
+                    <p class="mb-3">
+                        📅 <strong>Tanggal</strong><br>
+                        <span id="tanggal">
+                            Ahad, 16 Agustus 2026
+                        </span>
+                    </p>
+
+                    <p class="mb-3">
+                        🕘 <strong>Jam</strong><br>
+                        <span id="jam">
+                            09.00 - 11.30 WITA
+                        </span>
+                    </p>
+
+                    <p class="mb-3">
+                        👤 <strong>Pemateri</strong><br>
+                        <span id="pemateri">
+                            Ustadzah ...
+                        </span>
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <p class="mb-3">
+                        📍 <strong>Lokasi</strong><br>
+                        <span id="lokasi">
+                            Masjid ...
+                        </span>
+                    </p>
+
+                    <p class="mb-3">
+                        📝 <strong>Keterangan</strong><br>
+                        Terbuka untuk seluruh muslimah.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="mt-10">
+
+                <a href="#"
+                    class="bg-emerald-700 text-white px-6 py-3 rounded-xl">
+
+                    Lihat Lokasi
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= COUNTDOWN ================= -->
+
+<section class="bg-emerald-700 text-white py-16">
+
+    <div class="max-w-6xl mx-auto px-5 text-center">
+
+        <h2 class="text-3xl font-bold">
+            Menuju Kajian Berikutnya
+        </h2>
+
+        <div class="grid grid-cols-4 gap-6 mt-10 max-w-xl mx-auto">
+
+            <div>
+                <div id="hari" class="text-5xl font-bold">00</div>
+                Hari
+            </div>
+
+            <div>
+                <div id="jamCountdown" class="text-5xl font-bold">00</div>
+                Jam
+            </div>
+
+            <div>
+                <div id="menit" class="text-5xl font-bold">00</div>
+                Menit
+            </div>
+
+            <div>
+                <div id="detik" class="text-5xl font-bold">00</div>
+                Detik
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= TENTANG ================= -->
+
+<section class="py-20">
+
+    <div class="max-w-5xl mx-auto px-5 text-center">
+
+        <h2 class="text-4xl font-bold text-emerald-700">
+            Tentang Ummahat POSKU
+        </h2>
+
+        <p class="mt-6 text-gray-600 leading-8">
+
+            Ummahat POSKU Makassar merupakan wadah pembinaan muslimah melalui
+            kajian Islam rutin yang dilaksanakan setiap bulan sebagai sarana
+            memperdalam ilmu syar'i, mempererat ukhuwah, dan menumbuhkan
+            semangat beramal sesuai Al-Qur'an dan Sunnah.
+
+        </p>
+
+        <a href="tentang.html"
+            class="inline-block mt-8 bg-emerald-700 text-white px-8 py-3 rounded-xl">
+
+            Selengkapnya
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-gray-900 text-gray-300 py-10">
+
+    <div class="max-w-6xl mx-auto px-5 text-center">
+
+        <h3 class="text-white text-xl font-semibold">
+            Kajian Ummahat POSKU Makassar
+        </h3>
+
+        <p class="mt-4">
+            "Barang siapa menempuh jalan untuk mencari ilmu,
+            maka Allah akan mudahkan baginya jalan menuju surga."
+        </p>
+
+        <p class="mt-8 text-sm">
+            © 2026 Ummahat POSKU Makassar
+        </p>
+
+    </div>
+
+</footer>
+
+<script>
+
+const targetDate = new Date("2026-08-16T09:00:00");
+
+setInterval(function(){
+
+    const now = new Date();
+
+    const distance = targetDate - now;
+
+    if(distance < 0) return;
+
+    const hari = Math.floor(distance/(1000*60*60*24));
+    const jam = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const menit = Math.floor((distance%(1000*60*60))/(1000*60));
+    const detik = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("hari").innerHTML = hari;
+    document.getElementById("jamCountdown").innerHTML = jam;
+    document.getElementById("menit").innerHTML = menit;
+    document.getElementById("detik").innerHTML = detik;
+
+},1000);
+
+</script>
+
+</body>
+</html>
