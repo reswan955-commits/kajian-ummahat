@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jadwal Kajian Ummahat POSKU Makassar</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+    background:#f8fafc;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="bg-white shadow sticky top-0 z-50">
+
+<div class="max-w-6xl mx-auto px-5">
+
+<div class="flex justify-between items-center h-16">
+
+<h1 class="font-bold text-xl text-[#F5278B]">
+Ummahat POSKU
+</h1>
+
+<div class="space-x-8 font-medium">
+
+<a href="index.html" class="hover:text-[#F5278B]">
+Beranda
+</a>
+
+<a href="kajian.html" class="text-[#F5278B] font-bold">
+Kajian
+</a>
+
+<a href="tentang.html" class="hover:text-[#F5278B]">
+Tentang
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- HEADER -->
+
+<section class="py-14 bg-[#F5278B] text-white">
+
+<div class="max-w-6xl mx-auto px-5">
+
+<h2 class="text-4xl font-bold">
+Jadwal Kajian Ummahat POSKU Makassar
+</h2>
+
+<p class="mt-3 opacity-90">
+InsyaAllah dilaksanakan satu kali setiap bulan.
+</p>
+
+</div>
+
+</section>
+
+<!-- DATA -->
+
+<section class="py-14">
+
+<div class="max-w-5xl mx-auto px-5">
+
+<div id="jadwal" class="space-y-8">
+
+<div class="text-center text-gray-500">
+
+Memuat jadwal...
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="bg-gray-900 text-white py-8 text-center">
+
+© 2026 Ummahat POSKU Makassar
+
+</footer>
+
+<script>
+
+const API="https://script.google.com/macros/s/AKfycbzOF4h1N0ccOTLSYUFiXZoeElvIiKDuGCUWHj_CAs7ygMciiV1wYr5-ha57rCOiUffy/exec";
+
+async function loadKajian(){
+
+const response=await fetch(API);
+
+const data=await response.json();
+
+const container=document.getElementById("jadwal");
+
+container.innerHTML="";
+
+const bulanNama=[
+"Januari",
+"Februari",
+"Maret",
+"April",
+"Mei",
+"Juni",
+"Juli",
+"Agustus",
+"September",
+"Oktober",
+"November",
+"Desember"
+];
+
+const hariNama=[
+"Ahad",
+"Senin",
+"Selasa",
+"Rabu",
+"Kamis",
+"Jumat",
+"Sabtu"
+];
+
+data.forEach(item=>{
+
+const tgl=new Date(item.Tanggal);
+
+const bulan=bulanNama[tgl.getMonth()]+" "+tgl.getFullYear();
+
+const tanggal=
+hariNama[tgl.getDay()]+", "+
+tgl.getDate()+" "+
+bulanNama[tgl.getMonth()]+" "+
+tgl.getFullYear();
+
+container.innerHTML+=`
+
+<div class="bg-white rounded-3xl shadow-lg p-8">
+
+<div class="inline-block bg-[#F5278B] text-white px-4 py-2 rounded-full mb-5">
+
+${bulan}
+
+</div>
+
+<div class="space-y-3 text-lg">
+
+<p>📅 <b>${tanggal}</b></p>
+
+<p>🕘 ${item.Jam}</p>
+
+<p>👤 ${item.Pemateri}</p>
+
+<p>📍 ${item.Lokasi}</p>
+
+<p>${item.Keterangan}</p>
+
+</div>
+
+<a href="${item.Maps}"
+
+target="_blank"
+
+class="inline-block mt-6 bg-[#F5278B] text-white px-6 py-3 rounded-xl hover:opacity-90">
+
+📍 Lihat Lokasi
+
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadKajian();
+
+</script>
+
+</body>
+</html>
