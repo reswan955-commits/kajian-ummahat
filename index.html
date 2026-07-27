@@ -274,7 +274,61 @@ setInterval(function(){
     document.getElementById("detik").innerHTML = detik;
 
 },1000);
+// ==========================
+// Ambil data dari Google Sheet
+// ==========================
 
+const API = "https://script.google.com/macros/s/AKfycbzOF4h1N0ccOTLSYUFiXZoeElvIiKDuGCUWHj_CAs7ygMciiV1wYr5-ha57rCOiUffy/exec";
+
+async function loadKajian() {
+
+    try {
+
+        const response = await fetch(API);
+        const data = await response.json();
+
+        const kajian = data[0];
+
+        // Format tanggal Indonesia
+        const tgl = new Date(kajian.Tanggal);
+
+        const hari = [
+            "Ahad","Senin","Selasa","Rabu",
+            "Kamis","Jumat","Sabtu"
+        ];
+
+        const bulan = [
+            "Januari","Februari","Maret","April","Mei","Juni",
+            "Juli","Agustus","September","Oktober","November","Desember"
+        ];
+
+        document.getElementById("tanggal").innerHTML =
+            `${hari[tgl.getDay()]}, ${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
+
+        document.getElementById("jam").innerHTML =
+            kajian.Jam;
+
+        document.getElementById("pemateri").innerHTML =
+            kajian.Pemateri;
+
+        document.getElementById("lokasi").innerHTML =
+            kajian.Lokasi;
+
+        document.getElementById("keterangan").innerHTML =
+            kajian.Keterangan;
+
+        document.getElementById("mapsBtn").href =
+            kajian.Maps;
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+
+}
+
+loadKajian();
 </script>
 
 </body>
