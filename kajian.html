@@ -76,15 +76,13 @@ InsyaAllah dilaksanakan satu kali setiap bulan.
 
 <div class="max-w-5xl mx-auto px-5">
 
-<div id="jadwal" class="space-y-8">
-
-<div class="text-center text-gray-500">
-
-Memuat jadwal...
-
+<!-- Tombol Bulan -->
+<div id="bulanTabs"
+     class="flex flex-wrap justify-center gap-3 mb-10">
 </div>
 
-</div>
+<!-- Isi Kajian -->
+<div id="jadwal"></div>
 
 </div>
 
@@ -98,84 +96,106 @@ Memuat jadwal...
 
 <script>
 
-const API="https://script.google.com/macros/s/AKfycbzOF4h1N0ccOTLSYUFiXZoeElvIiKDuGCUWHj_CAs7ygMciiV1wYr5-ha57rCOiUffy/exec";
+const API = "https://script.google.com/macros/s/AKfycbzOF4h1N0ccOTLSYUFiXZoeElvIiKDuGCUWHj_CAs7ygMciiV1wYr5-ha57rCOiUffy/exec";
+
+let semuaData = [];
+
+const bulanNama = [
+"Januari","Februari","Maret","April","Mei","Juni",
+"Juli","Agustus","September","Oktober","November","Desember"
+];
+
+const hariNama = [
+"Ahad","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"
+];
 
 async function loadKajian(){
 
-const response=await fetch(API);
+    const response = await fetch(API);
+    semuaData = await response.json();
 
-const data=await response.json();
+    buatTab();
 
-const container=document.getElementById("jadwal");
+}
 
-container.innerHTML="";
+function buatTab(){
 
-const bulanNama=[
-"Januari",
-"Februari",
-"Maret",
-"April",
-"Mei",
-"Juni",
-"Juli",
-"Agustus",
-"September",
-"Oktober",
-"November",
-"Desember"
-];
+    const tabs = document.getElementById("bulanTabs");
 
-const hariNama=[
-"Ahad",
-"Senin",
-"Selasa",
-"Rabu",
-"Kamis",
-"Jumat",
-"Sabtu"
-];
+    tabs.innerHTML="";
 
-data.forEach(item=>{
+    semuaData.forEach((item,index)=>{
 
-const tgl=new Date(item.Tanggal);
+        tabs.innerHTML += `
+            <button
+                id="btn${index}"
+                onclick="tampil(${index})"
+                class="px-5 py-2 rounded-full border border-[#F5278B] hover:bg-[#F5278B] hover:text-white">
 
-const bulan=bulanNama[tgl.getMonth()]+" "+tgl.getFullYear();
+                ${item.Bulan}
 
-const tanggal=
-hariNama[tgl.getDay()]+", "+
-tgl.getDate()+" "+
-bulanNama[tgl.getMonth()]+" "+
-tgl.getFullYear();
+            </button>
+        `;
 
-container.innerHTML+=`
+    });
+
+    tampil(0);
+
+}
+
+function tampil(index){
+
+    document.querySelectorAll("#bulanTabs button").forEach(btn=>{
+
+        btn.classList.remove("bg-[#F5278B]","text-white");
+
+    });
+
+    document.getElementById("btn"+index)
+    .classList.add("bg-[#F5278B]","text-white");
+
+    const item = semuaData[index];
+
+    const tgl = new Date(item.Tanggal);
+
+    const tanggal =
+    `${hariNama[tgl.getDay()]}, ${tgl.getDate()} ${bulanNama[tgl.getMonth()]} ${tgl.getFullYear()}`;
+
+    document.getElementById("jadwal").innerHTML=`
 
 <div class="bg-white rounded-3xl shadow-lg p-8">
 
-<div class="inline-block bg-[#F5278B] text-white px-4 py-2 rounded-full mb-5">
+<h2 class="text-3xl font-bold text-[#F5278B] mb-6">
 
-${bulan}
+${item.Bulan}
 
-</div>
+</h2>
 
-<div class="space-y-3 text-lg">
+<p class="mb-3">
+📅 <b>${tanggal}</b>
+</p>
 
-<p>📅 <b>${tanggal}</b></p>
+<p class="mb-3">
+🕘 ${item.Jam}
+</p>
 
-<p>🕘 ${item.Jam}</p>
+<p class="mb-3">
+👤 ${item.Pemateri}
+</p>
 
-<p>👤 ${item.Pemateri}</p>
+<p class="mb-3">
+📍 ${item.Lokasi}
+</p>
 
-<p>📍 ${item.Lokasi}</p>
-
-<p>${item.Keterangan}</p>
-
-</div>
+<p class="mb-6">
+📝 ${item.Keterangan}
+</p>
 
 <a href="${item.Maps}"
 
 target="_blank"
 
-class="inline-block mt-6 bg-[#F5278B] text-white px-6 py-3 rounded-xl hover:opacity-90">
+class="bg-[#F5278B] text-white px-6 py-3 rounded-xl">
 
 📍 Lihat Lokasi
 
@@ -184,8 +204,6 @@ class="inline-block mt-6 bg-[#F5278B] text-white px-6 py-3 rounded-xl hover:opac
 </div>
 
 `;
-
-});
 
 }
 
